@@ -1,104 +1,229 @@
-/* CSS Variables for Theme Management */
+/* Retro Theme Variables */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --retro-bg: #1b1b1b;
+  --retro-surface: #222;
+  --retro-surface-2: #2a2a2a;
+  --retro-text: #e7f0ff;
+  --retro-text-dim: #a8c0ff;
+  --retro-accent: #00ff9c; /* neon green */
+  --retro-accent-2: #ff4d6d; /* magenta/red */
+  --retro-accent-3: #00c2ff; /* cyan */
+  --retro-border: #00ff9c;
+  --retro-shadow: #0c0c0c;
+  --danger: #ff4d6d;
+  --focus: #ffd166;
+  --muted: #8b98b9;
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+/* Light/Dark switch uses CSS variables to adapt */
+[data-theme="light"] {
+  --retro-bg: #f6f6f6;
+  --retro-surface: #ffffff;
+  --retro-surface-2: #f1f5f9;
+  --retro-text: #111827;
+  --retro-text-dim: #334155;
+  --retro-accent: #0ea5e9;
+  --retro-accent-2: #ef4444;
+  --retro-accent-3: #10b981;
+  --retro-border: #111827;
+  --retro-shadow: rgba(0, 0, 0, 0.1);
 }
 
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+/* Base App Layout */
+.App.retro-app {
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+  background: linear-gradient(180deg, var(--retro-bg) 0%, #101010 100%);
+  color: var(--retro-text);
   display: flex;
   flex-direction: column;
+}
+
+/* Header */
+.retro-header {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
+  justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 4px solid var(--retro-border);
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--retro-surface),
+    var(--retro-surface) 8px,
+    var(--retro-surface-2) 8px,
+    var(--retro-surface-2) 16px
+  );
+  box-shadow: 0 6px 0 var(--retro-shadow);
+}
+
+.retro-title {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--retro-accent);
+  text-shadow: 2px 2px 0 #000;
+  font-size: 22px;
+}
+
+/* Footer */
+.retro-footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 14px;
+  font-family: "Courier New", Courier, monospace;
+  color: var(--retro-text-dim);
+  border-top: 4px solid var(--retro-border);
+  background: var(--retro-surface);
+}
+
+/* Container */
+.container {
+  max-width: 760px;
+  width: 92%;
+  margin: 28px auto;
+}
+
+/* Cards */
+.card {
+  background: var(--retro-surface);
+  border: 4px solid var(--retro-border);
+  border-radius: 0;
+  box-shadow: 6px 6px 0 var(--retro-shadow);
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.input-card {
+  background: var(--retro-surface-2);
+}
+
+/* Form */
+.todo-form {
+  display: flex;
+  gap: 10px;
+}
+
+.retro-input {
+  flex: 1;
+  padding: 12px 12px;
+  font-size: 15px;
+  color: var(--retro-text);
+  background: #000;
+  border: 4px solid var(--retro-accent-3);
+  outline: none;
+  font-family: "Courier New", Courier, monospace;
+  box-shadow: inset 0 0 0 2px #000, 4px 4px 0 var(--retro-shadow);
+}
+
+.retro-input:focus {
+  border-color: var(--focus);
+}
+
+/* Pixel-esque Buttons */
+.pixel-btn {
   position: relative;
-}
-
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
-}
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+  border: 4px solid #000;
+  background: var(--retro-accent);
+  color: #000;
+  padding: 10px 16px;
+  font-weight: 800;
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 0 var(--retro-shadow);
+  transition: transform 0.05s ease;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.pixel-btn:hover {
+  transform: translate(-1px, -1px);
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.pixel-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--retro-shadow);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.pixel-btn.small {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.pixel-btn.danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.add-btn {
+  background: var(--retro-accent-3);
+}
+
+/* Theme toggle inherits pixel button style */
+.theme-toggle {
+  border-color: #000;
+}
+
+/* List section */
+.list-card .list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.list-title {
+  margin: 0;
+  font-size: 18px;
+  color: var(--retro-text);
+  font-family: "Courier New", Courier, monospace;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.todo-item {
+  background: #000;
+  border: 4px solid var(--retro-accent);
+  color: var(--retro-text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  box-shadow: 4px 4px 0 var(--retro-shadow);
+}
+
+.todo-text {
+  font-family: "Courier New", Courier, monospace;
+  word-break: break-word;
+}
+
+/* Messaging */
+.loading,
+.empty-state {
+  font-family: "Courier New", Courier, monospace;
+  color: var(--muted);
+  padding: 8px 0;
+}
+
+.error-banner {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #2b0007;
+  border: 4px solid var(--danger);
+  color: #ffdfe6;
+  font-family: "Courier New", Courier, monospace;
+  box-shadow: 4px 4px 0 var(--retro-shadow);
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .todo-form {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+  .pixel-btn {
+    width: 100%;
   }
 }
